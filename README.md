@@ -1,6 +1,6 @@
 # enhanzer_flutter_demo
 
-A new Flutter project.
+An application demo built for Enhanzer to apply for the Mobile Dev Internship - Flutter
 
 ## Getting Started
 
