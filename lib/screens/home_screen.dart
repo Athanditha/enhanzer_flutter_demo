@@ -53,73 +53,103 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             )
           : SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    color: Theme.of(context).primaryColor,
-                    child: Column(
-                      children: [
-                        SizedBox(height: 20),
-                        CircleAvatar(
-                          radius: 50,
-                          backgroundColor: Colors.white,
-                          child: Text(
-                            _user!.displayName[0].toUpperCase(),
+              physics: AlwaysScrollableScrollPhysics(),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: MediaQuery.of(context).size.height - AppBar().preferredSize.height - MediaQuery.of(context).padding.top,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      color: Theme.of(context).primaryColor,
+                      padding: EdgeInsets.symmetric(vertical: 32.0, horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 120,
+                            height: 120,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 4,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  spreadRadius: 1,
+                                  blurRadius: 8,
+                                  offset: Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: Text(
+                                _user!.displayName.isNotEmpty 
+                                    ? _user!.displayName[0].toUpperCase()
+                                    : '?',
+                                style: TextStyle(
+                                  fontSize: 48,
+                                  fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 24),
+                          Text(
+                            _user!.displayName,
                             style: TextStyle(
-                              fontSize: 40,
+                              fontSize: 28,
                               fontWeight: FontWeight.bold,
-                              color: Theme.of(context).primaryColor,
+                              color: Colors.white,
                             ),
+                            textAlign: TextAlign.center,
                           ),
-                        ),
-                        SizedBox(height: 16),
-                        Text(
-                          _user!.displayName,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          SizedBox(height: 8),
+                          Text(
+                            _user!.email,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white.withOpacity(0.9),
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                        ),
-                        Text(
-                          _user!.email,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white.withOpacity(0.9),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        _buildInfoCard(
-                          title: "Account Information",
-                          items: [
-                            InfoItem(
-                              icon: Icons.badge,
-                              title: "User Code",
-                              value: _user!.userCode,
-                            ),
-                            InfoItem(
-                              icon: Icons.business,
-                              title: "Company Code",
-                              value: _user!.companyCode,
-                            ),
-                            InfoItem(
-                              icon: Icons.work,
-                              title: "Employee Code",
-                              value: _user!.employeeCode,
-                            ),
-                          ],
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          _buildInfoCard(
+                            title: "Account Information",
+                            items: [
+                              InfoItem(
+                                icon: Icons.badge,
+                                title: "User Code",
+                                value: _user!.userCode,
+                              ),
+                              InfoItem(
+                                icon: Icons.business,
+                                title: "Company Code",
+                                value: _user!.companyCode,
+                              ),
+                              InfoItem(
+                                icon: Icons.work,
+                                title: "Employee Code",
+                                value: _user!.employeeCode,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
     );
