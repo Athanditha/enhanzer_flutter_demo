@@ -1,3 +1,6 @@
+/// Data model representing a user in the application.
+/// Handles JSON serialization and database operations.
+
 import 'package:flutter/material.dart';
 
 class User {
@@ -15,6 +18,7 @@ class User {
     required this.companyCode,
   });
 
+  /// Creates a User instance from JSON data
   factory User.fromJson(Map<String, dynamic> json) {
     // For API response
     if (json.containsKey('User_Code')) {
@@ -36,6 +40,7 @@ class User {
     );
   }
 
+  /// Converts User instance to a Map for database storage
   Map<String, dynamic> toMap() {
     return {
       'userCode': userCode,
